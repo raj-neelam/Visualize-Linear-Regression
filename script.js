@@ -4,17 +4,16 @@ var c = new Canvas(0.8, 0.9)
 
 const numberofdatapointsEmt = document.getElementById("numberOfDataPoints");
 const showGridsEmt = document.getElementById("show_grid");
-var datapoints_number = document.getElementById('numberOfDataPointsView')
-var new_data_button = document.getElementById('newData')
+const datapoints_number = document.getElementById('numberOfDataPointsView')
+const new_data_button = document.getElementById('newData')
 const regressorEmt = document.getElementById("regress");
 const showError = document.getElementById("distance");
+
 document.addEventListener('contextmenu', event => event.preventDefault());
-showError.checked=true
-regressorEmt.checked=true
 
 showGridsEmt.checked=true
-var show_grid=showGridsEmt.checked
-showGridsEmt.addEventListener("input", ()=>{show_grid = showGridsEmt.checked})
+showError.checked=true
+regressorEmt.checked=true
 datapoints_number.textContent = numberofdatapointsEmt.value
 
 function create_Grid(){
@@ -62,7 +61,7 @@ class Data{
     }       
     draw(){
         for (var i=0; i<this.X.length; i++){
-            c.circle(this.X[i]+this.x_offset,this.Y[i]+this.y_offset,4, 0, 'lightgreen')
+            c.circle(this.X[i]+this.x_offset,this.Y[i]+this.y_offset,4, 0, 'blue')
         }
     }
     trim(n){
@@ -114,6 +113,7 @@ numberofdatapointsEmt.addEventListener("input", ()=>{
     var new_num = numberofdatapointsEmt.value
     data.trim(new_num)
 })
+
 var change_data=false
 new_data_button.addEventListener('click',()=>{change_data=true})
 
@@ -123,8 +123,9 @@ var button_ctrl=true
 function animate(){
     requestAnimationFrame(animate)
     c.init()
+    c.rect(0,0,c.width,c.height,0,'lightblue')
     // write from here
-    if (show_grid){create_Grid()}
+    if (showGridsEmt.checked){create_Grid()}
     if (change_data){
         change_data=false
         data = new Data(numberofdatapointsEmt.value)
@@ -154,7 +155,7 @@ function animate(){
         var y1 = (m*(-x)+b)
         var x2 = x
         var y2 = (m*(x)+b)
-        c.line(x1+x, y1+y, x2+x, y2+y, 3, 'teal')
+        c.line(x1+x, y1+y, x2+x, y2+y, 3, 'green')
     }
     if (showError.checked){
         for (let i=0;i<data.X.length;i++){
@@ -164,8 +165,7 @@ function animate(){
             var y2 = m*data.X[i]+b
             c.line(x1+c.width*.5,y1+c.height*.5,x2+c.width*.5,y2+c.height*.5,1, 'red')
         }
-    }
-    
+    }  
     data.draw()
     if (c.mouse_btn==0 && button_ctrl){
         if (c.mouse[0]>0 && c.mouse[1]>0){
