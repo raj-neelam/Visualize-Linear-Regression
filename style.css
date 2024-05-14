@@ -1,0 +1,24 @@
+*{margin: 0;padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;}
+    header{
+        background-color: lightblue;
+        height: 10vh;
+        align-content: center;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .main_content{
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+    }
+    aside{
+        background-color: lightcoral;
+        width: 20vw;
+        padding: 2vh 2vw;
+    }
+    main{
+        width: 80vw;
+        box-shadow: inset 0 0 10px black;
+    }

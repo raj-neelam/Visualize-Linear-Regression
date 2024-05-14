@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>this is the header</h1>
+    </header>
+    <div class="main_content">
+        <aside>
+            <input type="checkbox" id="show_grid">
+            Show Grids
+            <br>
+            data points : <span id="numberOfDataPointsView">0</span>
+            <input type="range" min="10" max="150" value="50" id="numberOfDataPoints">
+            <br>
+            <input type="button" value="Generate New Data" id="newData">
+            <br>
+            <input type="checkbox" id="regress">
+            Find Best Fit Line
+            <br>
+            <input type="checkbox" id="distance">
+            show error
+        </aside>
+        <main>
+            <canvas width="500" height="300"></canvas>
+        </main>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
