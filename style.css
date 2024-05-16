@@ -19,6 +19,9 @@ aside{
     background: linear-gradient(90deg,lightblue,lightblue);
     width: 20vw;
     padding: 2vh 2vw;
+	/* border: 1px solid black; */
+	border-radius: 10px;
+	margin: 0.1vw;
 }
 main{
     width: 80vw;
