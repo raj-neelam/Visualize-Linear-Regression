@@ -74,8 +74,8 @@ export class Data{
 export class Regressor{
     constructor(c){
         this.c = c
-        this.m=0
-        this.b=0
+        this.m=(Math.random() * 2-1) * 2
+        this.b=(Math.random() * 2-1) * 100
     }
     regress(data, c){
         var sum = 0

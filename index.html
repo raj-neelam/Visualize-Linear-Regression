@@ -17,6 +17,25 @@
 
     <aside>
       <div class="section">
+
+        <label class="select" for="slct">
+          <select id="regresion_mode">
+            <option value="OLS">Linear Regression OLS (Discreat Formula)</option>
+            <option value="SGD">Linear Regression SGD (Gradient Decend)</option>
+            <option value="PR">Polynomial Regression (Gradient Decend)</option>
+          </select>
+          <svg>
+            <use xlink:href="#select-arrow-down"></use>
+          </svg>
+          <svg class="sprites">
+            <symbol id="select-arrow-down" viewbox="0 0 10 6">
+              <polyline points="1 1 5 5 9 1"></polyline>
+            </symbol>
+          </svg>
+        </label>
+      </div>
+
+      <div class="section">
         <div class="checkbox-wrapper-46">
           <input class="inp-cbx" id="show_grid" type="checkbox" />
           <label class="cbx" for="show_grid"><span>

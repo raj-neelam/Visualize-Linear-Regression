@@ -2,11 +2,17 @@ import { Canvas } from './canvas_util.js';
 import { Data } from './regressor_util.js';
 import { Regressor } from './regressor_util.js';
 
-var c = new Canvas(0.793, 0.886)
+var c = new Canvas(0.754, 0.886)
 
 function getFromId(id){
     return document.getElementById(id);
 }
+
+// select
+var regresion_mode = getFromId('regresion_mode')
+regresion_mode.addEventListener('input',()=>{
+    // to-do change
+})
 
 // slider
 var numberofdatapointsEmt = getFromId("numberOfDataPoints")
@@ -34,7 +40,6 @@ showError.checked=false
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-// regressorEmt.checked=true
 datapoints_number.textContent = numberofdatapointsEmt.value
 
 function create_Grid(){
@@ -60,13 +65,13 @@ numberofdatapointsEmt.addEventListener("input", ()=>{
     var new_num = numberofdatapointsEmt.value
     data.trim(new_num)
 })
-
 val_m.addEventListener('input', ()=>{
-    val_m_show.textContent = val_m.value
+    console.log(val_m.value, typeof(val_m.value))
+    val_m_show.textContent = +val_m.value
     regressor.m = +val_m.value
 })
 val_b.addEventListener('input', ()=>{
-    val_b_show.textContent = val_b.value
+    val_b_show.textContent = +val_b.value
     regressor.b = +val_b.value
 })
 
@@ -78,21 +83,20 @@ function animate(){
     c.init()
     c.rect(0,0,c.width,c.height,0,'lightblue')
     // write from here
-
-    
-    
     if (showGridsEmt.checked){create_Grid()}
+
     if (change_data){
         change_data=false
         data = new Data(numberofdatapointsEmt.value, c)
     }
+
     if (regress){
-        regressor.regress(data)
-        val_m.value = regressor.m
-        val_m_show = regressor.m
-        val_b.value = regressor.b
-        val_b_show = regressor.b
         regress=false
+        regressor.regress(data)
+        val_m.value = regressor.m.toFixed(2)
+        val_m_show.textContent = regressor.m.toFixed(2)
+        val_b.value = regressor.b.toFixed(2)
+        val_b_show.textContent = regressor.b.toFixed(2)
     }
     if (showError.checked){
         regressor.show_errors(data)
