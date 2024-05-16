@@ -63,12 +63,11 @@ numberofdatapointsEmt.addEventListener("input", ()=>{
 
 val_m.addEventListener('input', ()=>{
     val_m_show.textContent = val_m.value
-    regressor.m = val_m.value
+    regressor.m = +val_m.value
 })
 val_b.addEventListener('input', ()=>{
     val_b_show.textContent = val_b.value
-    regressor.b = val_b.value
-    console.log(val_b.value)
+    regressor.b = +val_b.value
 })
 
 
@@ -89,10 +88,10 @@ function animate(){
     }
     if (regress){
         regressor.regress(data)
-        // val_m.value = regressor.m
-        // val_m_show = regressor.m
-        // val_b.value = regressor.b
-        // val_b_show = regressor.b
+        val_m.value = regressor.m
+        val_m_show = regressor.m
+        val_b.value = regressor.b
+        val_b_show = regressor.b
         regress=false
     }
     if (showError.checked){

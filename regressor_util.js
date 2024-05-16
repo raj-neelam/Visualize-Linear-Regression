@@ -114,6 +114,7 @@ export class Regressor{
         var y1 = (this.m*(-x)+this.b)
         var x2 = x
         var y2 = (this.m*(x)+this.b)
+        // console.log(x1,y1,x2,y2)
         this.c.line(x1+x, y1+y, x2+x, y2+y, 3, 'green')
     }
 
