@@ -96,15 +96,9 @@ export class Regressor{
         this.m = num/den
         this.b = y_mean - this.m*x_mean
 
-        var x = this.c.width*.5
-        var y = this.c.height*.5
-        var x1 = -x
-        var y1 = (this.m*(-x)+this.b)
-        var x2 = x
-        var y2 = (this.m*(x)+this.b)
-        this.c.line(x1+x, y1+y, x2+x, y2+y, 3, 'green')
+        
     }
-    show_errors(data, c){
+    show_errors(data){
         for (let i=0;i<data.X.length;i++){
             var x1 = data.X[i]
             var y1 = data.Y[i]
@@ -113,4 +107,14 @@ export class Regressor{
             this.c.line(x1+this.c.width*.5,y1+this.c.height*.5,x2+this.c.width*.5,y2+this.c.height*.5,1, 'red')
         }
     }
+    draw_line(){
+        var x = this.c.width*.5
+        var y = this.c.height*.5
+        var x1 = -x
+        var y1 = (this.m*(-x)+this.b)
+        var x2 = x
+        var y2 = (this.m*(x)+this.b)
+        this.c.line(x1+x, y1+y, x2+x, y2+y, 3, 'green')
+    }
+
 }
