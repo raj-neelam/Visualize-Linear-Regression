@@ -44,16 +44,14 @@
               </svg></span><span>Show Grids</span>
           </label>
         </div>
-        <br>
-        data points : <span id="numberOfDataPointsView">0</span>
-        <input type="range" min="10" max="150" value="50" step="'1" id="numberOfDataPoints">
-        <br>
+        <div class="slider_block">
+          data points : <span id="numberOfDataPointsView">0</span>
+          <input type="range" min="10" max="150" value="50" step="'1" id="numberOfDataPoints">
+        </div>
         <button class="button-25" role="button" id="newData">Generate New Data</button>
       </div>
       <div class="section">
-        <br>
         <button class="button-25" role="button" id="regress">Find Best Fit Line</button>
-        <br>
         <div class="checkbox-wrapper-46">
           <input class="inp-cbx" id="distance" type="checkbox" />
           <label class="cbx" for="distance"><span>
@@ -62,13 +60,24 @@
               </svg></span><span>Show Errors</span>
           </label>
         </div>
-        <br>
-        value of m : <span id="val_m_show">0</span>
-        <input type="range" min="-2" max="2" value="0" step="0.01" id="val_m">
-        <br>
-        value of b : <span id="val_b_show">0</span>
-        <input type="range" min="-200" max="200" value="0" step="1" id="val_b">
-        <br>
+        <div class="slider_block">
+          <span id="total_epoches_show">0</span>
+          <input type="range" min="1" max="100" value="10" step="1" id="total_epoches">
+          <span id="current_epoch">0</span>
+        </div>
+        <div class="slider_block">
+          <span id="learning_rate_show">0</span>
+          <input type="range" min="0.001" max="1" value="0.1" step="0.001" id="learning_Rate">
+        </div>
+        <button class="button-25" role="button" id="regress_gradient">Find Best Fit Line Through Gradient Decsnd</button>
+        <div class="slider_block">
+          <span id="val_m_show">0</span>
+          <input type="range" min="-2" max="2" value="0" step="0.01" id="val_m">
+        </div>
+        <div class="slider_block">
+          <span id="val_b_show">0</span>
+          <input type="range" min="-200" max="200" value="0" step="1" id="val_b">
+        </div>
 
       </div>
     </aside>
@@ -79,7 +88,7 @@
 
   </div>
 
-  <script type="module" src="script.js"></script>
+  <script type="module" src="javascript/script.js"></script>
 
 </body>
 
