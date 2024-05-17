@@ -8,6 +8,10 @@ function getFromId(id){
     return document.getElementById(id);
 }
 
+// div
+var epoch_tab = getFromId('epoch_tab')
+var learning_tab = getFromId('learning_tab')
+
 // slider
 var numberofdatapointsEmt = getFromId("numberOfDataPoints")
 var total_epoches_num = getFromId("total_epoches")
@@ -47,39 +51,18 @@ showGridsEmt.checked=true
 showError.checked=false
 
 // select
+var regression_mode_value = ''
 var regresion_mode = getFromId('regresion_mode')
-regresion_mode.addEventListener('input',()=>{
-    // to-do change
-    if (regresion_mode.value==="OLS"){
-        // in OLS MODE
-        console.log("ols_MODE")
-        // showing
-        regressorEmt.style.display='block';
-        val_m.style.display='block';
-        val_m_show.style.display='block';
-        val_b.style.display='block';
-        val_b_show.style.display='block';
-    }
-    else if (regresion_mode.value==="SGD"){
-        // in SGD MODE
-        console.log("SGD_MODE")
-        // hiding
-        regressorEmt.style.display='none';
-        val_m.style.display='none';
-        val_m_show.style.display='none';
-        val_b.style.display='none';
-        val_b_show.style.display='none';
+regresion_mode.addEventListener('input',mode_selector)
+mode_selector()
 
-    }
-    else{
-        // in Polynomial MODE
-        console.log("polynomial mode")
-    }
-})
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 datapoints_number.textContent = numberofdatapointsEmt.value
+
+var data = new Data(numberofdatapointsEmt.value,c)
+var regressor = new Regressor(regression_mode_value, c)
 
 function create_Grid(){
     let lines_x = 12
@@ -95,9 +78,39 @@ function create_Grid(){
     c.line(c.width*.5,0,c.width*.5,c.height,3, 'white')
     c.line(0,c.height*.5,c.width,c.height*.5,3, 'white')
 }
+function mode_selector(){
+    // to-do change
+    if (regresion_mode.value==="OLS"){
+        regression_mode_value='OLS'
+        // in OLS MODE
+        console.log("ols_MODE")
+        // showing
+        regressorEmt.style.display = 'block'
 
-var data = new Data(numberofdatapointsEmt.value,c)
-var regressor = new Regressor('OLS', c)
+        // hiding
+        epoch_tab.style.display = 'none'
+        learning_tab.style.display = 'none'
+        regress_gradient.style.display = 'none'
+    }
+    else if (regresion_mode.value==="SGD"){
+        regression_mode_value='SGD'
+        // in SGD MODE
+        console.log("SGD_MODE")
+        // showing
+        epoch_tab.style.display = 'block'
+        learning_tab.style.display = 'block'
+        regress_gradient.style.display = 'block'
+
+        // hiding
+        regressorEmt.style.display = 'none'
+
+    }
+    else{
+        // in Polynomial MODE
+        console.log("polynomial mode")
+    }
+    regressor = new Regressor(regression_mode_value, c)
+}
 
 numberofdatapointsEmt.addEventListener("input", ()=>{
     datapoints_number.textContent = numberofdatapointsEmt.value
@@ -134,7 +147,7 @@ function animate(){
 
     if (regress){
         regress=false
-        regressor.regress(data)
+        regressor.regress(data, total_epoches_num.value)
         val_m.value = regressor.m.toFixed(2)
         val_m_show.textContent = 'value of m : ' + regressor.m.toFixed(2)
         val_b.value = regressor.b.toFixed(2)

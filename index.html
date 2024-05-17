@@ -20,8 +20,8 @@
 
         <label class="select" for="slct">
           <select id="regresion_mode">
-            <option value="OLS">Linear Regression OLS (Discreat Formula)</option>
             <option value="SGD">Linear Regression SGD (Gradient Decend)</option>
+            <option value="OLS">Linear Regression OLS (Discreat Formula)</option>
             <option value="PR">Polynomial Regression (Gradient Decend)</option>
           </select>
           <svg>
@@ -60,12 +60,12 @@
               </svg></span><span>Show Errors</span>
           </label>
         </div>
-        <div class="slider_block">
+        <div class="slider_block" id="epoch_tab">
           <span id="total_epoches_show">0</span>
           <input type="range" min="1" max="100" value="10" step="1" id="total_epoches">
           <span id="current_epoch">0</span>
         </div>
-        <div class="slider_block">
+        <div class="slider_block" id="learning_tab">
           <span id="learning_rate_show">0</span>
           <input type="range" min="0.001" max="1" value="0.1" step="0.001" id="learning_Rate">
         </div>

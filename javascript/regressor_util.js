@@ -8,7 +8,7 @@ export class Regressor {
         this.step = 0
         this.mode = mode
     }
-    regress(data, c) {
+    regress(data, max_epoch=0) {
         if (this.mode == 'OLS') {
             var sum = 0
             var sum2 = 0
@@ -30,6 +30,8 @@ export class Regressor {
         }
         else if (this.mode == 'SGD'){
             // to regress
+            this.step += 1
+            // if (this.step>=this.max_epoch)
         }
 
     }
