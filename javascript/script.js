@@ -27,8 +27,8 @@ var learning_Rate_view = getFromId("learning_rate_show")
 var val_m_show = getFromId("val_m_show")
 var val_b_show = getFromId("val_b_show")
 // seting Default view
-total_epoches_view.textContent = 'Total Epoches : 10'
-learning_Rate_view.textContent = 'learning Rate : 0.1'
+total_epoches_view.textContent = 'Total Epoches : ' + total_epoches_num.value
+learning_Rate_view.textContent = 'learning Rate : ' + learning_Rate.value
 val_m_show.textContent = 'value of m : 0'
 val_b_show.textContent = 'value of b : 0'
 current_epoch.textContent = 'Current Epoch : 0'
@@ -39,10 +39,9 @@ var regressorEmt = getFromId("regress")
 var regress_gradient = getFromId("regress_gradient")
 var change_data=false
 var regress=false
-var regress_gradi=false
 new_data_button.addEventListener('click',()=>{change_data=true})
 regressorEmt.addEventListener('click',()=>{regress=true})
-regress_gradient.addEventListener('click',()=>{regress_gradi=true})
+regress_gradient.addEventListener('click',()=>{regress=true})
 
 // checkboxes
 var showGridsEmt = getFromId("show_grid")
@@ -92,10 +91,10 @@ function mode_selector(){
         learning_tab.style.display = 'none'
         regress_gradient.style.display = 'none'
     }
-    else if (regresion_mode.value==="SGD"){
-        regression_mode_value='SGD'
-        // in SGD MODE
-        console.log("SGD_MODE")
+    else if (regresion_mode.value==="BGD"){
+        regression_mode_value='BGD'
+        // in BGD MODE
+        console.log("BGD_MODE")
         // showing
         epoch_tab.style.display = 'block'
         learning_tab.style.display = 'block'
@@ -105,11 +104,22 @@ function mode_selector(){
         regressorEmt.style.display = 'none'
 
     }
+    else if(regresion_mode.value==='SGD'){
+        regression_mode_value='SGD'
+        //in SGD MODE
+        console.log('SGD_MODE')
+        // showing
+        learning_tab.style.display = 'block'
+        regress_gradient.style.display = 'block'
+        //hiding
+        epoch_tab.style.display = 'none'
+        regressorEmt.style.display = 'none'
+    }
     else{
         // in Polynomial MODE
         console.log("polynomial mode")
     }
-    regressor = new Regressor(regression_mode_value, c)
+    regressor = new Regressor(regression_mode_value, c, learning_Rate.value)
 }
 
 numberofdatapointsEmt.addEventListener("input", ()=>{
@@ -136,7 +146,7 @@ var button_ctrl=true
 function animate(){
     requestAnimationFrame(animate)
     c.init()
-    c.rect(0,0,c.width,c.height,0,'lightblue')
+    c.rect(0,0,c.width,c.height,0,'rgb(137, 177, 187)')
     // write from here
     if (showGridsEmt.checked){create_Grid()}
 
@@ -146,8 +156,13 @@ function animate(){
     }
 
     if (regress){
-        regress=false
-        regressor.regress(data, total_epoches_num.value)
+        var step = regressor.regress(data, total_epoches_num.value)
+        current_epoch.textContent = 'Current Epoch : ' + regressor.step
+        if (step>=total_epoches_num.value){
+            regress=false
+            regressor.step=0
+        }
+
         val_m.value = regressor.m.toFixed(2)
         val_m_show.textContent = 'value of m : ' + regressor.m.toFixed(2)
         val_b.value = regressor.b.toFixed(2)
@@ -158,7 +173,6 @@ function animate(){
     }  
     data.draw()
     regressor.draw_line()
-    // console.log(regressor.loss(data))
     if (c.mouse_btn==0 && button_ctrl){
         if (c.mouse[0]>0 && c.mouse[1]>0){
             button_ctrl = false

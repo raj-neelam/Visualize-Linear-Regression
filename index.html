@@ -20,6 +20,7 @@
 
         <label class="select" for="slct">
           <select id="regresion_mode">
+            <option value="BGD">Linear Regression (Batch Gradient Decend)</option>
             <option value="SGD">Linear Regression SGD (Gradient Decend)</option>
             <option value="OLS">Linear Regression OLS (Discreat Formula)</option>
             <option value="PR">Polynomial Regression (Gradient Decend)</option>
@@ -62,12 +63,12 @@
         </div>
         <div class="slider_block" id="epoch_tab">
           <span id="total_epoches_show">0</span>
-          <input type="range" min="1" max="100" value="10" step="1" id="total_epoches">
+          <input type="range" min="10" max="500" value="250" step="1" id="total_epoches">
           <span id="current_epoch">0</span>
         </div>
         <div class="slider_block" id="learning_tab">
           <span id="learning_rate_show">0</span>
-          <input type="range" min="0.001" max="1" value="0.1" step="0.001" id="learning_Rate">
+          <input type="range" min="0" max="1" value="0.5" step="0.001" id="learning_Rate">
         </div>
         <button class="button-25" role="button" id="regress_gradient">Find Best Fit Line Through Gradient Decsnd</button>
         <div class="slider_block">

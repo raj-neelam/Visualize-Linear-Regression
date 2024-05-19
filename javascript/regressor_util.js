@@ -1,11 +1,12 @@
 export class Regressor {
-    constructor(mode, c) {
+    constructor(mode,c , lr=0.01) {
         this.c = c
         this.m = (Math.random() * 2 - 1) * 2
         this.b = (Math.random() * 2 - 1) * 100
         this.starting_m = this.m
         this.starting_b = this.b
         this.step = 0
+        this.lr=lr
         this.mode = mode
     }
     regress(data, max_epoch=0) {
@@ -27,11 +28,47 @@ export class Regressor {
             }
             this.m = num / den
             this.b = y_mean - this.m * x_mean
+            return max_epoch
         }
-        else if (this.mode == 'SGD'){
+        else if (this.mode == 'BGD'){
             // to regress
             this.step += 1
-            // if (this.step>=this.max_epoch)
+            if (this.step>=max_epoch){
+                console.log('done')
+            }else{
+                var sumer = 0
+                for (let i=0;i<data.X.length;i++){
+                    sumer += data.Y[i]-(data.X[i]*this.m+this.b)
+                }
+                var slope_b = (-2/data.X.length)*sumer
+
+                sumer = 0
+                for (let i=0;i<data.X.length;i++){
+                    sumer += (data.Y[i]-(data.X[i]*this.m+this.b))*data.X[i]
+                }
+                var slope_m = (-2/data.X.length)*sumer
+
+                this.m -=  this.lr*slope_m*0.00001
+                this.b -=  this.lr*slope_b*1
+
+            }
+            return this.step
+        }
+        else if (this.mode == 'SGD'){
+            
+            var loss = data.Y[this.step]-(data.X[this.step]*this.m+this.b)
+            var slope = -2*loss
+            this.b -=  this.lr*slope*0.01
+
+            loss = (data.Y[this.step]-(data.X[this.step]*this.m+this.b))*data.X[this.step]
+            slope = -2*loss
+            this.m -=  this.lr*slope*0.000001
+
+            
+            this.step += 1
+            if (this.step==data.X.length){
+                return max_epoch
+            }
         }
 
     }
