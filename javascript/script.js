@@ -29,8 +29,8 @@ var val_b_show = getFromId("val_b_show")
 // seting Default view
 total_epoches_view.textContent = 'Total Epoches : ' + total_epoches_num.value
 learning_Rate_view.textContent = 'learning Rate : ' + learning_Rate.value
-val_m_show.textContent = 'value of m : 0'
-val_b_show.textContent = 'value of b : 0'
+val_m_show.textContent = 'value of m : '+ val_m.value
+val_b_show.textContent = 'value of b : '+ val_b.value
 current_epoch.textContent = 'Current Epoch : 0'
 
 // buttons
@@ -146,7 +146,7 @@ var button_ctrl=true
 function animate(){
     requestAnimationFrame(animate)
     c.init()
-    c.rect(0,0,c.width,c.height,0,'rgb(137, 177, 187)')
+    c.rect(0,0,c.width,c.height,0,'rgb(177, 197, 207)')
     // write from here
     if (showGridsEmt.checked){create_Grid()}
 
